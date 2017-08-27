@@ -1,0 +1,63 @@
+ Generated template for the AtcPage page.
+<!--
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+
+-->
+<ion-header>
+  <ion-navbar color="primary" text-center>
+    <button *ngIf="!buscar" ion-button icon-only menuToggle><ion-icon name="menu"></ion-icon></button>
+    <ion-title *ngIf="!buscar">Controladores</ion-title>
+    <ion-searchbar *ngIf="buscar" [(ngModel)]="searchTerm" [showCancelButton]="true" (ionCancel)="toggleSearch()" (ionInput)="getItems($event)"></ion-searchbar>
+    <ion-buttons end *ngIf="!buscar">
+      <button ion-button icon-only (click)="toggleSearch()"><ion-icon name="search"></ion-icon></button>
+      <!--<button ion-button icon-only (click)="presentPopover($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>-->
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <!--<ion-item-group >
+    <ion-item-divider>Siguiendo</ion-item-divider>-->
+  <ion-list-header>
+    Siguiendo
+  </ion-list-header>
+  <ion-list>
+    <ion-item *ngFor="let item of atcs | seguido:1" (click)="irAtcDetalle(item)">
+      <ion-avatar item-start style="background-color: #000000;border-radius: 50px;">
+        <img src="assets/images/atc.png">
+      </ion-avatar>
+      <h2>{{item.callsign}}</h2>
+      <h4>{{item.frequency}}</h4>
+      <p *ngIf="item.positionCode == 'CTR'">{{item.firName}} {{item.positionName}} - {{item.pais}}</p>
+      <p *ngIf="item.positionCode != 'CTR'">{{item.Aeropuerto}} {{item.positionName}} - {{item.pais}}</p>
+    </ion-item>
+  </ion-list>
+  <!--</ion-item-group>
+  <ion-item-group >
+  <ion-item-divider >Seguir</ion-item-divider>-->
+  <ion-list-header>
+    Seguir
+  </ion-list-header>
+
+  <ion-list>
+    <ion-item *ngFor="let item of atcs  | seguido:0" (click)="irAtcDetalle(item)">
+      <ion-avatar item-start style="background-color: #000000;border-radius: 50px;">
+        <img src="assets/images/atc.png">
+      </ion-avatar>
+      <h2>{{item.callsign}}</h2>
+      <h4>{{item.frequency}}</h4>
+      <p *ngIf="item.positionCode == 'CTR'">{{item.firName}} {{item.positionName}} - {{item.pais}}</p>
+      <p *ngIf="item.positionCode != 'CTR'">{{item.Aeropuerto}} {{item.positionName}} - {{item.pais}}</p>
+    </ion-item>
+  </ion-list>
+  <!--</ion-item-group>-->
+</ion-content>

@@ -1,0 +1,8 @@
+{
+  "name": "vatonline",
+  "app_id": "d882ecc4",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

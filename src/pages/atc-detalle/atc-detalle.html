@@ -1,0 +1,96 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>{{controlador.callsign}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+  <ion-row>
+    <ion-col>
+      Cid:
+    </ion-col>
+    <ion-col>
+      {{controlador.cid}}
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      Nombre:
+    </ion-col>
+    <ion-col>
+      {{controlador.realname}}
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      Frecuencia:
+    </ion-col>
+    <ion-col>
+      {{controlador.frequency}}
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      Time online:
+    </ion-col>
+    <ion-col>
+      {{controlador.timelogon}}
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      Posicion:
+    </ion-col>
+    <ion-col>
+      {{controlador.positionCode}}
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="controlador.positionCode != 'CTR'">
+    <ion-col>
+      Aeropuerto:
+    </ion-col>
+    <ion-col>
+      {{controlador.Aeropuerto}}
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="controlador.positionCode != 'CTR'">
+    <ion-col>
+      Pais:
+    </ion-col>
+    <ion-col>
+      {{controlador.pais}}
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      Fir:
+    </ion-col>
+    <ion-col>
+      {{controlador.firCode}}
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      Fir name:
+    </ion-col>
+    <ion-col>
+      {{controlador.firName}}
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      Posicion
+    </ion-col>
+    <ion-col>
+      {{controlador.positionName}}
+    </ion-col>
+  </ion-row>
+</ion-grid>
+  <button ion-button block (click)="agregarAlarma()" *ngIf="controlador.notificar == 0">
+    <ion-icon name="alarm" left> Notificar</ion-icon>
+  </button>
+  <button ion-button block (click)="quitarAlarma()" color="danger" *ngIf="controlador.notificar== 1">
+    <ion-icon name="trash" left> Quitar notificaciones</ion-icon>
+  </button>
+</ion-content>
