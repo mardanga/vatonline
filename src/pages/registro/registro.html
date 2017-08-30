@@ -14,16 +14,20 @@
   <div text-center>  
     <img src="assets/images/piloto.png" alt="" >
   </div>
+   <form [formGroup]="formulario" (ngSubmit)="registrar()">
   <ion-item>
     <ion-label floating>Cid</ion-label>
-    <ion-input type="number" pattern="[0-9]*" [(ngModel)]="user.cid" ></ion-input>
+    <ion-input type="number" pattern="[0-9]*" formControlName="cid" ></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label floating>Mail</ion-label>
-    <ion-input type="email" [(ngModel)]="user.mail" ></ion-input>
+    <ion-input type="email" formControlName="mail" ></ion-input>
   </ion-item>
+
   <div padding>
-  <button (click)="registrar()" ion-button block color="secondary" >Iniciar</button>
+  <button type="submit" ion-button block color="secondary" [disabled]="!formulario.valid" >Iniciar</button>
   </div>
+   </form>
+{{formulario.valid}}
   </ion-content>

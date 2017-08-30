@@ -4,6 +4,7 @@ import { IUsuario } from './../../clases/usuario';
 import { Component } from '@angular/core';
 import { Platform, NavController, LoadingController, ToastController } from 'ionic-angular';
 import { Network } from '@ionic-native/network';
+import { FormGroup, FormControl, Validators } from '@angular/forms'
 
 //servicios
 import { VatsimService} from '../../services/vatsim.service';
@@ -15,6 +16,8 @@ import { VatsimService} from '../../services/vatsim.service';
 
 export class RegistroPage {
 
+  formulario: FormGroup;
+
   constructor(
     private vatsimSrv : VatsimService,
     public loadingCtrl: LoadingController,
@@ -24,6 +27,14 @@ export class RegistroPage {
     private toastCtrl: ToastController,
     private network: Network
   ) {
+
+    this.formulario = new FormGroup(
+      {
+        cid: new FormControl('', Validators.required),
+        mail: new  FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')])
+      }
+    );
+
   }
 
   ionViewDidEnter() {
@@ -47,6 +58,7 @@ export class RegistroPage {
   };
 
   registrar(){
+    
     if(!this.vatsimSrv.getOnlineInfo())
     {
       this.showToast("No hay conexion a internet");
@@ -60,22 +72,20 @@ export class RegistroPage {
     
     //this.user.idDevice= "preuba";
     //console.log(this.user);
+    this.user.mail= this.formulario.value.mail;
+    this.user.cid= this.formulario.value.cid;
     if(!this.plt.is('cordova')){
-        
-    //this.user.mail= "testing@testingcom";
-        this.vatsimSrv.registrar(this.user).subscribe(
-          data=> {
-            this.vatsimSrv.setIdUsuario(data);   
-            this.navCtrl.push(TabsPage);
-            loading.dismiss();
-        });
+      this.vatsimSrv.registrar(this.user).subscribe(
+        data=> {
+          this.vatsimSrv.setIdUsuario(data);   
+          this.navCtrl.push(TabsPage);
+          loading.dismiss();
+      });
     }
     else{
       this.push.register().then((t: PushToken) => {
-
           return this.push.saveToken(t);
         }).then((t: PushToken) => {
-          //console.log('Token saved:', t.token);
           this.user.idDevice = t.token;
           this.vatsimSrv.registrar(this.user).subscribe(
             data=> {

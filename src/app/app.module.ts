@@ -6,6 +6,8 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { HttpModule } from '@angular/http';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+
 
 import { MyApp } from './app.component';
 import { AtcPage, AtcDetallePage, TabsPage, 
@@ -35,7 +37,9 @@ import { PopoverComponent } from '../components/popover/popover';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpModule,
-    CloudModule.forRoot(CLOUDSETTINGS)
+    CloudModule.forRoot(CLOUDSETTINGS),
+    FormsModule, 
+    ReactiveFormsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
