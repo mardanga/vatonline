@@ -1,6 +1,6 @@
 import { VatsimService } from './../services/vatsim.service';
 import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { NavController, Platform, ToastController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Network } from 'ionic-native';
@@ -20,7 +20,9 @@ export class MyApp {
     private platform: Platform, 
     statusBar: StatusBar, 
     splashScreen: SplashScreen,
-    private vatsimSrv: VatsimService
+    private vatsimSrv: VatsimService,
+    private navCtrl: NavController,
+    private toastCtrl: ToastController
 ) {
 
     if(!this.platform.is('mobile')){
@@ -69,6 +71,32 @@ export class MyApp {
         }
         splashScreen.hide();
    
+        //back button
+        var lastTimeBackPress = 0;
+        var timePeriodToExit  = 2000;
+
+        platform.registerBackButtonAction(() => {
+            // get current active page
+            let view = this.navCtrl.getActive();
+            if (view.component.name == "TabsPage") {
+                //Double check to exit app
+                if (new Date().getTime() - lastTimeBackPress < timePeriodToExit) {
+                    this.platform.exitApp(); //Exit from app
+                } else {
+                    let toast = this.toastCtrl.create({
+                        message:  'Presiona back nuevamente para salir de la App?',
+                        duration: 3000,
+                        position: 'bottom'
+                    });
+                    toast.present();
+                    lastTimeBackPress = new Date().getTime();
+                }
+            } else {
+                // go to previous page
+                this.navCtrl.pop({});
+            }
+        });
+
       });
     }
   }
