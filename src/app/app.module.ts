@@ -2,7 +2,7 @@ import { CLOUDSETTINGS } from './../config/config';
 import { CloudModule } from '@ionic/cloud-angular';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { IonicApp, IonicErrorHandler, IonicModule,NavController } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { HttpModule } from '@angular/http';
@@ -40,6 +40,7 @@ import { PopoverComponent } from '../components/popover/popover';
     CloudModule.forRoot(CLOUDSETTINGS),
     FormsModule, 
     ReactiveFormsModule
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -57,7 +58,8 @@ import { PopoverComponent } from '../components/popover/popover';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     VatsimService,
-    Network
+    Network,
+    
   ]
 })
 export class AppModule {}

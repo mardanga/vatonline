@@ -1,19 +1,17 @@
 import { VatsimService } from './../services/vatsim.service';
-import { Component } from '@angular/core';
-import { NavController, Platform, ToastController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Platform, ToastController, NavController, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Network } from 'ionic-native';
 
 import { RegistroPage, TabsPage } from '../pages/index.pages';
 
-
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-
-
+  @ViewChild(Nav) nav: Nav;
   rootPage:any;
 
   constructor(
@@ -21,10 +19,8 @@ export class MyApp {
     statusBar: StatusBar, 
     splashScreen: SplashScreen,
     private vatsimSrv: VatsimService,
-    private navCtrl: NavController,
     private toastCtrl: ToastController
 ) {
-
     if(!this.platform.is('mobile')){
      if(this.vatsimSrv.getIdUsuario() != 0)
         {
@@ -77,15 +73,15 @@ export class MyApp {
 
         platform.registerBackButtonAction(() => {
             // get current active page
-            let view = this.navCtrl.getActive();
+            let view = this.nav.getActive();
             if (view.component.name == "TabsPage") {
                 //Double check to exit app
                 if (new Date().getTime() - lastTimeBackPress < timePeriodToExit) {
                     this.platform.exitApp(); //Exit from app
                 } else {
                     let toast = this.toastCtrl.create({
-                        message:  'Presiona back nuevamente para salir de la App?',
-                        duration: 3000,
+                        message:  'Presiona nuevamente para salir de la App',
+                        duration: 2000,
                         position: 'bottom'
                     });
                     toast.present();
@@ -93,7 +89,7 @@ export class MyApp {
                 }
             } else {
                 // go to previous page
-                this.navCtrl.pop({});
+                this.nav.pop({});
             }
         });
 
