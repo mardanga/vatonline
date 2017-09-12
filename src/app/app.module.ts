@@ -20,6 +20,8 @@ import { VatsimService} from '../services/vatsim.service';
 import { SeguidoPipe } from '../pipes/seguido/seguido';
 import { Network } from '@ionic-native/network';
 import { PopoverComponent } from '../components/popover/popover';
+import { TimeOnlinePipe } from '../pipes/time-online/time-online';
+import { MomentModule } from 'angular2-moment';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { PopoverComponent } from '../components/popover/popover';
     RegistroPage,
     AgregarAlarmaPage,
     SeguidoPipe,
-    PopoverComponent
+    PopoverComponent,
+    TimeOnlinePipe
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,8 @@ import { PopoverComponent } from '../components/popover/popover';
     HttpModule,
     CloudModule.forRoot(CLOUDSETTINGS),
     FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MomentModule
     
   ],
   bootstrap: [IonicApp],

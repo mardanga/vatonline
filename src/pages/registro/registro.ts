@@ -58,13 +58,13 @@ export class RegistroPage {
   };
 
   registrar(){
-    
+    /*
     if(!this.vatsimSrv.getOnlineInfo())
     {
       this.showToast("No hay conexion a internet");
       return
     }
-
+*/
     let loading = this.loadingCtrl.create({
       content: 'Iniciando...'
     });
@@ -74,7 +74,7 @@ export class RegistroPage {
     //console.log(this.user);
     this.user.mail= this.formulario.value.mail;
     this.user.cid= this.formulario.value.cid;
-    if(!this.plt.is('cordova')){
+    if(this.plt.is('core')){
       this.vatsimSrv.registrar(this.user).subscribe(
         data=> {
           this.vatsimSrv.setIdUsuario(data);   
@@ -99,7 +99,7 @@ export class RegistroPage {
       ;
 
       this.push.rx.notification().subscribe((msg) => {
-        alert(msg.title + ': ' + msg.text);
+        showToast(msg.text);
       });
     }
   }

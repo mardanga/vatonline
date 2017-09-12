@@ -99,9 +99,10 @@ export class AtcDetallePage {
       return
     }
 
-
+console.log(this.controlador);
     let control = this.controlador.callsign;
     this.alarm.callsign = this.controlador.callsign.substring(0, this.controlador.callsign.indexOf('_'));
+    this.alarm.id = this.controlador.idAlarma;
     if (this.controlador.positionCode != "CTR") {
       control = 'todas las dependencias de ' + this.controlador.callsign.substring(0, this.controlador.callsign.indexOf('_'));
     }

@@ -70,10 +70,10 @@ export class MyApp {
         //back button
         var lastTimeBackPress = 0;
         var timePeriodToExit  = 2000;
-
-        platform.registerBackButtonAction(() => {
+        /*platform.registerBackButtonAction(() => {
             // get current active page
             let view = this.nav.getActive();
+            console.log(view);
             if (view.component.name == "TabsPage") {
                 //Double check to exit app
                 if (new Date().getTime() - lastTimeBackPress < timePeriodToExit) {
@@ -92,6 +92,7 @@ export class MyApp {
                 this.nav.pop({});
             }
         });
+        */
 
       });
     }

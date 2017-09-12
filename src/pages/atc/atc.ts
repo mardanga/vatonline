@@ -79,6 +79,7 @@ export class AtcPage {
   }
 
   irAtcDetalle(controlador:any){
+    
     this.navCtrl.push(AtcDetallePage, {"controlador": controlador});
   }
 
@@ -101,6 +102,7 @@ export class AtcPage {
           data=> {
             this.atcs = data;
             this.atcsAux = this.atcs;
+            this.vatsimSrv.setControladoresOffline(this.atcs);
             if(conLoading)
             {
               loader.dismiss();
@@ -114,10 +116,12 @@ export class AtcPage {
         data=> {
           this.atcs = data;
           this.atcsAux = this.atcs;
+          this.vatsimSrv.setControladoresOffline(this.atcs);
         }
       );
     }
-    this.vatsimSrv.setControladoresOffline(this.atcs);
+    //console.log(this.atcs);
+    
   }
 
   getItems(ev: any) {

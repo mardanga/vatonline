@@ -11,5 +11,6 @@ export interface IControlador
     firCode:string,
     firName:string,
     positionName:string,
-    notificar:number
+    notificar:number,
+    idAlarma:number
 }

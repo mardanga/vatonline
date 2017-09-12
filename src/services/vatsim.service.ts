@@ -109,7 +109,7 @@ export class VatsimService {
       if(estado != null){
         estado = JSON.parse(estado);
       }
-      console.log(estado);
+      //console.log(estado);
       return estado;
   }
 
